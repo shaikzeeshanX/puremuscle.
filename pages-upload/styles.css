@@ -1,0 +1,486 @@
+/* =========== MORPH / PURE MUSCLE — styles (split from index.html) =========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* deep-pink theme — three pink shades plus a little white (no dark tones) */
+  --bg:#f6b6cf;
+  --pink-1:#ffd7e6;
+  --pink-2:#f7b3cb;
+  --pink-3:#ef9cbb;
+  --white:#ffffff;
+  /* dark pink — the equipment line art and the deeper glows in the wash */
+  --pink-ink:#8b2450;
+  --pink-deep:rgba(150,38,82,.30);
+  --pink-deep-soft:rgba(150,38,82,.18);
+  --fg:#151514;
+  --card:#fffafc;
+  --line:rgba(150,70,105,.30);
+  --dark:#0d0e11;
+  --dark-fg:#f1efe9;
+  --font-head:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --font-serif:'Instrument Serif','Times New Roman',serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-head);
+  background:var(--bg);
+  color:var(--fg);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.5;
+}
+/* ── the light-pink wash behind every light section: the three pink shades
+   plus a little white, drifting so the colours keep trading places ── */
+body::before{
+  content:"";position:fixed;inset:-32%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(closest-side,var(--pink-deep),transparent) 68% 32%/48% 48% no-repeat,
+    radial-gradient(closest-side,var(--pink-deep-soft),transparent) 24% 68%/42% 42% no-repeat,
+    radial-gradient(closest-side,var(--pink-2),transparent) 16% 20%/64% 64% no-repeat,
+    radial-gradient(closest-side,var(--white),transparent) 79% 13%/44% 44% no-repeat,
+    radial-gradient(closest-side,var(--pink-3),transparent) 74% 84%/58% 58% no-repeat,
+    radial-gradient(closest-side,var(--pink-1),transparent) 20% 80%/62% 62% no-repeat,
+    linear-gradient(135deg,var(--pink-1) 0%,var(--pink-2) 55%,var(--pink-3) 100%);
+  animation:pink-wash 34s ease-in-out infinite alternate;
+}
+@keyframes pink-wash{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1.02)}
+  20%{transform:translate3d(-4%,3%,0) rotate(7deg) scale(1.12)}
+  40%{transform:translate3d(3%,-4%,0) rotate(-6deg) scale(1.05)}
+  60%{transform:translate3d(-3%,-3%,0) rotate(9deg) scale(1.15)}
+  80%{transform:translate3d(4%,2%,0) rotate(-8deg) scale(1.06)}
+  100%{transform:translate3d(0,0,0) rotate(3deg) scale(1.13)}
+}
+/* ── scattered gym-equipment line art (component: gym-background.js) ── */
+.gym-bg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  z-index:-1;overflow:hidden;pointer-events:none;
+  color:var(--pink-ink);
+}
+.gym-bg svg{position:absolute;display:block}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--fg);color:var(--bg)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--fg);border-radius:2px}
+
+/* ═══════════ NAV ═══════════ */
+.nav{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px clamp(20px,3.2vw,48px) 0;
+}
+.nav-brand{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.03em}
+.nav-links{display:flex;gap:clamp(18px,2.4vw,36px);list-style:none;margin:0;padding:0;align-items:center}
+.nav-link{font-size:13.5px;font-weight:500;opacity:.7;transition:opacity .2s;color:inherit;text-decoration:none}
+.nav-link:hover{opacity:1}
+.nav-cta{
+  font-size:13px;font-weight:600;padding:8px 18px;
+  border:1.5px solid var(--fg);border-radius:999px;
+  transition:background .25s,color .25s;
+}
+.nav-cta:hover{background:var(--fg);color:var(--bg)}
+
+/* ═══════════ HERO ═══════════ */
+.hero{
+  position:relative;width:100%;height:100svh;min-height:600px;
+  overflow:hidden;display:flex;flex-direction:column;
+  /* the opening screen keeps a backdrop of its own: the same pink the rest of
+     the page is made of stays at the two sides, softens through a mostly-white
+     band, and the middle — where the form drifts — is white, so the animation
+     sits against a light field instead of a pink blob. The whites keep some
+     alpha, so the drifting wash still breathes through underneath. */
+  background:
+    radial-gradient(76% 64% at 50% 56%,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.88) 40%,
+      rgba(255,255,255,.44) 68%,
+      rgba(255,255,255,0) 90%),
+    linear-gradient(90deg,
+      var(--pink-3) 0%,
+      var(--pink-2) 10%,
+      rgba(255,255,255,.52) 25%,
+      rgba(255,255,255,.88) 40%,
+      rgba(255,255,255,.88) 60%,
+      rgba(255,255,255,.52) 75%,
+      var(--pink-2) 90%,
+      var(--pink-3) 100%);
+}
+.hero-stage{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .5s}
+.hero-fallback{position:absolute;display:block;max-width:none;user-select:none;transition:opacity .5s}
+.hero[data-gl="on"] .hero-canvas{opacity:1}
+.hero[data-gl="on"] .hero-fallback{opacity:0}
+.hero-backdrop{
+  position:absolute;left:50%;z-index:0;transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;user-select:none;
+  font-family:var(--font-head);font-weight:800;letter-spacing:-.06em;line-height:.8;
+  color:color-mix(in srgb,var(--fg) 5%,transparent);
+  font-size:clamp(120px,22vw,340px);
+}
+.hero-hint{
+  position:absolute;z-index:1;transform:translateX(-50%);
+  display:flex;align-items:center;gap:10px;white-space:nowrap;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  opacity:.5;pointer-events:none;transition:opacity .8s;
+  bottom:14vh;
+}
+.hero-hint::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:currentColor;animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(.6);opacity:.45}50%{transform:scale(1);opacity:1}}
+.hero[data-touched="1"] .hero-hint{opacity:0}
+.hero-spacer{flex:1}
+.hero-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);
+  align-items:end;gap:clamp(24px,4vw,72px);
+  padding:0 clamp(20px,3.2vw,48px) clamp(28px,3.4vw,52px);
+}
+.hero-eyebrow{
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  opacity:.62;margin-bottom:clamp(14px,1.6vw,22px);
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:"";width:28px;height:1px;background:currentColor;opacity:.7}
+.hero-h1{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(40px,min(6.6vw,11.5vh),120px);
+  line-height:.92;letter-spacing:-.045em;
+}
+.hero-h1 .line{display:block}
+.hero-accent{font-family:var(--font-serif);font-style:italic;font-weight:400;letter-spacing:-.02em}
+.hero-aside{max-width:400px;justify-self:end;padding-bottom:.6em}
+.hero-body{font-size:clamp(15px,1.1vw,17px);line-height:1.5;opacity:.78;margin-bottom:26px}
+.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:22px}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  height:46px;padding:0 22px;border-radius:999px;
+  background:var(--fg);color:var(--bg);font-size:14.5px;font-weight:600;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.hero-btn:hover{transform:translateY(-1px)}
+.hero-txt{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14.5px;font-weight:600;padding:4px 0;
+  border-bottom:1px solid color-mix(in srgb,var(--fg) 30%,transparent);
+}
+.hero-credit{
+  position:absolute;z-index:2;right:clamp(20px,3.2vw,48px);bottom:10px;
+  font-size:10px;letter-spacing:.06em;opacity:.38;
+}
+
+/* ═══════════ MARQUEE ═══════════ */
+.marquee{
+  position:relative;overflow:hidden;
+  min-height:40svh;                       /* a shorter band — no longer half a
+                                             page, but still a real band */
+  display:flex;align-items:center;
+  padding:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  /* the background is the gradient-wave animation (gradient-wave.js), drawn
+     by its own canvas into the .marquee-wave layer below. This static
+     gradient is only what a browser without WebGL sees — a stand-in in the
+     same pinks, never seen next to the real thing. */
+  background:linear-gradient(135deg,#f9b8d4,#ffffff 45%,#ff9a80);
+}
+/* the wave's layer: the component was built to fill a whole window, so it is
+   drawn into a frame 2.6× the band's height (keeping its own proportions)
+   and cropped by this band. It sits under the text. */
+.marquee-wave{
+  position:absolute;left:0;right:0;top:50%;height:260%;
+  transform:translateY(-50%);
+  z-index:0;pointer-events:none;
+}
+.marquee-wave canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* the strip: one run of text, repeated once in the markup, carried across by
+   a single linear transform. The native <marquee> that used to live here
+   stepped its scroll (6px every 85ms), which is what made the flow catch and
+   look stuck; a transform cannot stutter, it just drifts evenly.
+   The ink is one fixed off-white ("dark white"): no colour cycling, and
+   nothing at all happens on hover. */
+.marquee-track{
+  display:flex;gap:0;width:max-content;
+  position:relative;z-index:1;
+  animation:marquee 60s linear infinite;
+}
+.marquee-item{
+  font-family:var(--font-head);font-weight:900;
+  font-size:clamp(48px,12vw,200px);
+  letter-spacing:-.05em;line-height:.95;
+  white-space:nowrap;
+  padding-right:clamp(24px,4vw,80px);
+  color:#ffffff;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ═══════════ STICKY SECTIONS ═══════════ */
+.pinned-section{position:relative}
+.pinned-sticky{
+  position:sticky;top:0;
+  height:100svh;min-height:560px;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;
+}
+.section-eyebrow{
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  opacity:.55;margin-bottom:clamp(10px,1.2vw,18px);
+  display:flex;align-items:center;gap:10px;
+}
+.section-eyebrow::before{content:"";width:24px;height:1px;background:currentColor;opacity:.6}
+.section-h2{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(32px,4.5vw,72px);
+  letter-spacing:-.04em;line-height:1.0;
+}
+.section-h2 .serif{font-family:var(--font-serif);font-style:italic;font-weight:400}
+
+/* Products */
+.products-sticky{background:transparent;color:var(--fg)}
+.products-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(16px,2vw,32px);
+  padding:0 clamp(20px,3.2vw,48px);
+  max-width:1400px;margin:0 auto;
+}
+.product-card{
+  background:var(--card);border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);display:flex;flex-direction:column;
+  opacity:0;transform:translateY(60px) scale(.96);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.product-card.visible{opacity:1;transform:translateY(0) scale(1)}
+.product-img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.product-info{padding:24px}
+.product-name{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.product-desc{font-size:14px;opacity:.65;line-height:1.5;margin-bottom:16px}
+.product-meta{display:flex;justify-content:space-between;align-items:center}
+.product-price{font-size:18px;font-weight:700}
+.product-tag{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;
+  background:color-mix(in srgb,var(--fg) 8%,transparent);
+}
+
+/* Stats */
+.stats-sticky{background:var(--dark);color:var(--dark-fg);overflow:hidden}
+/* ── grid pulse layer (component: grid-pulse.js) — the hairline field the
+   component's own demo uses; the lit cells draw on the canvas. The canvas
+   fades out toward the bottom, so whatever follows the section can climb
+   over it, exactly as the component styles itself. --grid-pulse-cell must
+   match the `cell` prop passed in app.js. */
+.stats-sticky>*{position:relative;z-index:1}
+.grid-pulse{
+  position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  --grid-pulse-cell:24px;
+  --grid-pulse-line:color-mix(in srgb,var(--dark-fg) 7%,transparent);
+  background-image:
+    linear-gradient(to right,var(--grid-pulse-line) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid-pulse-line) 1px,transparent 1px);
+  background-size:var(--grid-pulse-cell) var(--grid-pulse-cell);
+  -webkit-mask-image:linear-gradient(to bottom,#000 92%,transparent);
+  mask-image:linear-gradient(to bottom,#000 92%,transparent);
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(24px,3vw,64px);
+  padding:0 clamp(20px,3.2vw,48px);
+  max-width:1200px;margin:0 auto;text-align:center;
+}
+.stat-num{
+  font-family:var(--font-head);font-weight:800;
+  font-size:clamp(48px,6vw,110px);
+  letter-spacing:-.05em;line-height:1;margin-bottom:8px;
+}
+.stat-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;font-weight:500}
+
+/* Feature — the corridor is the section; the copy sits in a band over its
+   bottom, the way the hero composes its copy under the sculpture. */
+.feature-sticky{background:transparent;color:var(--fg);overflow:hidden}
+/* the seam blend: as the dark stats section above scrolls away, its colour
+   keeps sinking into this section's pink for a stretch, so the two ends
+   read as connected instead of butted together */
+.feature-sticky::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:180px;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to bottom,
+    var(--dark) 0%,
+    color-mix(in srgb,var(--dark) 72%,transparent) 45%,
+    transparent 100%);
+}
+/* ── image stream corridor (component: image-stream-hero.js) ── */
+.feature-stream{
+  position:absolute;inset:0;z-index:0;
+  container-type:inline-size;   /* the cqw unit the whole corridor is built in */
+  pointer-events:none;
+}
+.stream-layer{position:absolute;inset:0;pointer-events:none}
+.stream-inner{position:absolute;inset:0;transform-style:preserve-3d}
+.stream-card{
+  position:absolute;overflow:hidden;background:var(--card);
+  box-shadow:0 30px 70px -34px rgba(21,21,20,.5);
+}
+.stream-img{width:100%;height:100%;object-fit:cover}
+/* the page colour climbs into the corridor so the copy always sits on solid
+   background, whatever the images are doing behind it */
+.feature-wash{
+  position:absolute;left:0;right:0;bottom:0;height:54%;z-index:2;pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%, var(--bg) 32%,
+    color-mix(in srgb, var(--bg) 72%, transparent) 62%,
+    color-mix(in srgb, var(--bg) 0%, transparent) 100%);
+}
+.feature-split{
+  position:relative;z-index:3;height:100%;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  align-items:end;gap:clamp(28px,4vw,80px);
+  max-width:1400px;margin:0 auto;
+  padding:0 clamp(20px,3.2vw,48px) clamp(34px,5vh,64px);
+}
+.feature-points{display:flex;flex-direction:column;gap:24px}
+.feature-point{display:flex;gap:16px;align-items:flex-start}
+.feature-dot{width:8px;height:8px;border-radius:50%;background:var(--fg);flex-shrink:0;margin-top:8px}
+.feature-pt-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.feature-pt-desc{font-size:14px;opacity:.6;line-height:1.5}
+
+/* Quote */
+.quote-sticky{background:var(--dark);color:var(--dark-fg)}
+.quote-inner{
+  position:relative;z-index:2;
+  text-align:center;padding:0 clamp(20px,3.2vw,48px);
+  max-width:1000px;margin:0 auto;
+}
+/* ── boxes background: skewed interactive grid ── */
+.quote-boxes{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 100% 100% at 50% 50%,#000 30%,rgba(0,0,0,.72) 62%,transparent 100%);
+  mask-image:radial-gradient(ellipse 100% 100% at 50% 50%,#000 30%,rgba(0,0,0,.72) 62%,transparent 100%);
+}
+.boxes-layer{
+  position:absolute;left:25%;top:-25%;width:100%;height:100%;
+  padding:16px;display:flex;will-change:transform;
+  transform:translate(-40%,-60%) skewX(-48deg) skewY(14deg) scale(.675) rotate(0deg) translateZ(0);
+}
+.boxes-row{
+  width:192px;height:96px;flex:0 0 192px;
+  border-left:1px solid #334155;position:relative;
+}
+.boxes-cell{
+  width:192px;height:96px;position:relative;
+  border-right:1px solid #334155;border-top:1px solid #334155;
+  transition:background-color 2s ease;
+}
+.boxes-plus{
+  position:absolute;top:-42px;left:-66px;width:120px;height:72px;
+  color:#334155;stroke-width:.34;pointer-events:none;
+}
+.quote-text{
+  font-family:var(--font-serif);font-style:italic;
+  font-size:clamp(32px,5vw,80px);
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:32px;
+}
+.quote-attr{font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;font-weight:500}
+
+/* CTA + Footer */
+.cta-section{
+  background:transparent;color:var(--fg);
+  padding:clamp(80px,10vw,160px) clamp(20px,3.2vw,48px);
+  text-align:center;
+}
+.cta-h2{
+  font-family:var(--font-head);font-weight:800;
+  font-size:clamp(40px,6vw,100px);
+  letter-spacing:-.05em;line-height:1;margin-bottom:24px;
+}
+.cta-h2 .serif{font-family:var(--font-serif);font-style:italic;font-weight:400}
+.cta-sub{font-size:16px;opacity:.6;margin-bottom:40px}
+.cta-form{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto}
+.cta-input{
+  flex:1;height:52px;padding:0 20px;
+  border:1.5px solid var(--line);border-radius:999px;
+  font:inherit;font-size:14px;background:transparent;
+  color:var(--fg);outline:none;transition:border-color .2s;
+}
+.cta-input:focus{border-color:var(--fg)}
+.cta-submit{
+  height:52px;padding:0 28px;border-radius:999px;
+  background:var(--fg);color:var(--bg);font-size:14px;font-weight:600;
+  transition:transform .3s;
+}
+.cta-submit:hover{transform:translateY(-1px)}
+
+/* ── 3D testimonials behind the CTA (component: testimonial-marquee.js) ──
+   the layer is pointer-transparent decoration, under the CTA copy; the
+   section clips it, veils fade it into the page colour on all four edges */
+.cta-section{position:relative;overflow:hidden}
+.cta-3d{position:absolute;inset:0;z-index:0;pointer-events:none;perspective:300px;overflow:hidden}
+.cta-h2,.cta-sub,.cta-form{position:relative;z-index:2}
+.t3-tilt{
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+  position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;height:250%;
+  transform:translateX(-100px) translateY(0) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg);
+}
+.t3-run{display:flex;flex-direction:column;gap:var(--gap,1rem);width:200px;flex-shrink:0}
+.t3-run.up .t3-copy{animation-direction:reverse}
+.t3-copy{
+  display:flex;flex-direction:column;gap:var(--gap,1rem);justify-content:space-around;flex-shrink:0;
+  animation:marquee-vertical3d 40s linear infinite;
+}
+.t3-card{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px;box-shadow:0 10px 30px -18px rgba(21,21,20,.35);
+  text-align:left;
+}
+.t3-card figcaption{display:flex;align-items:center;gap:10px}
+.t3-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--pink-2)}
+.t3-who{display:flex;flex-direction:column;min-width:0}
+.t3-name{font-size:13px;font-weight:600;color:var(--fg)}
+.t3-name small{font-weight:400;opacity:.55;font-size:11px}
+.t3-handle{font-size:11px;font-weight:500;opacity:.5}
+.t3-body{margin-top:10px;font-size:13px;line-height:1.4;color:var(--fg)}
+.t3-veil{position:absolute;pointer-events:none}
+.t3-top{inset-inline:0;top:0;height:25%;background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 80%,transparent),transparent)}
+.t3-bottom{inset-inline:0;bottom:0;height:25%;background:linear-gradient(to top,var(--bg),transparent)}
+.t3-left{inset-block:0;left:0;width:25%;background:linear-gradient(to right,var(--bg),transparent)}
+.t3-right{inset-block:0;right:0;width:25%;background:linear-gradient(to left,var(--bg),transparent)}
+@keyframes marquee-vertical3d{
+  from{transform:translateY(0)}
+  to{transform:translateY(calc(-100% - var(--gap,1rem)))}
+}
+.footer{
+  border-top:1px solid var(--line);
+  padding:32px clamp(20px,3.2vw,48px);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;opacity:.5;
+}
+.footer-links{display:flex;gap:24px}
+
+/* Responsive */
+@media(max-width:1023px){
+  .hero-content{grid-template-columns:1fr;gap:28px}
+  .hero-aside{justify-self:start;max-width:520px;padding-bottom:0}
+  .products-grid{grid-template-columns:1fr 1fr}
+  .product-card:last-child{grid-column:1/-1}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .feature-split{grid-template-columns:1fr;gap:24px}
+  .feature-points{gap:18px}
+  .feature-wash{height:66%}
+  }
+@media(max-width:639px){
+  .nav-links li:not(.keep){display:none}
+  .products-grid{grid-template-columns:1fr}
+  .product-card:last-child{grid-column:auto}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .cta-form{flex-direction:column}
+  .cta-input,.cta-submit{width:100%}
+  .footer{flex-direction:column;gap:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  /* the marquee is deliberately NOT frozen here: its run of text is the one
+     thing on the page that was explicitly asked to keep flowing, and cutting
+     it leaves a dead strip where the band should be. Nothing else about it
+     moves — the ink is fixed and the motion is a steady sideways drift. */
+  *{transition:none!important}
+}

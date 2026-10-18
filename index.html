@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Let's Build Pure Muscles and Mass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+
+<!-- ═══════════ BACKGROUND — scattered gym-equipment line art ═══════════ -->
+<div class="gym-bg" id="gymBg" aria-hidden="true"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero" data-touched="0">
+  <div class="hero-backdrop" aria-hidden="true">PURE MUSCLE</div>
+  <div class="hero-stage" id="heroStage">
+    <img class="hero-fallback" id="heroFallback" src="https://cdn.21st.dev/assets/mirror/ae/ae8c3de9003460e59182e950ccd345f68f27f9d0e4808b64c92c962a4eca7120.webp" alt="" crossorigin="anonymous" draggable="false" />
+  </div>
+
+  <div class="nav">
+    <a class="nav-brand" href="#">Pure Muscle<sup style="font-size:.5em;vertical-align:super">®</sup></a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#products">Products</a></li>
+      <li><a class="nav-link" href="#stats">Science</a></li>
+      <li><a class="nav-link" href="#feature">Quality</a></li>
+      <li class="keep"><a class="nav-cta" href="#cta">Shop</a></li>
+    </ul>
+  </div>
+
+  <div class="hero-hint" id="heroHint">Move across the form</div>
+
+  <div class="hero-spacer"></div>
+
+  <div class="hero-content">
+    <div>
+      <p class="hero-eyebrow">PURE MUSCLE BY ZEESHAN</p>
+      <h1 class="hero-h1">
+        <span class="line">Lets build</span>
+        <span class="line"><span class="hero-accent">pure</span> muscles and mass.</span>
+      </h1>
+    </div>
+    <div class="hero-aside">
+      <p class="hero-body">Bioactive compounds suspended in a delivery system engineered for one purpose: maximum absorption, zero fillers, everything your body can actually use.</p>
+      <div class="hero-ctas">
+        <a class="hero-btn" href="#products">Explore the line
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="hero-txt" href="#stats">The science
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a class="hero-credit" href="#">by pure muscle nutrition</a>
+</section>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee" aria-hidden="true">
+    <div class="marquee-wave" id="marqueeWave"></div>
+    <!-- two identical runs so the CSS loop has no seam; the wording and its
+         spacing are exactly as before. The native <marquee> that used to be
+         here stepped its scroll (6px every 85ms) — this is one linear
+         transform, so the flow is even all the way across. -->
+    <div class="marquee-track">
+      <span class="marquee-item"> PRE-WORKOUT  ★ WHEY ISOLATE     ★ CREATINE      ★ POST WORKOUT ★ BCAA'S ★ GLUTAMINE</span>
+      <span class="marquee-item"> PRE-WORKOUT  ★ WHEY ISOLATE     ★ CREATINE      ★ POST WORKOUT ★ BCAA'S ★ GLUTAMINE</span>
+    </div>
+</div>
+
+<!-- ═══════════ PRODUCTS ═══════════ -->
+<section class="pinned-section" id="products" style="height:380vh">
+  <div class="pinned-sticky products-sticky">
+    <div style="max-width:1400px;margin:0 auto;padding:0 clamp(20px,3.2vw,48px)">
+      <p class="section-eyebrow">The Line</p>
+      <h2 class="section-h2">Three formulas.<br/><span class="serif">One obsession.</span></h2>
+    </div>
+    <div class="products-grid" style="margin-top:40px">
+      <article class="product-card" data-card>
+        <img class="product-img" src="https://imgs.search.brave.com/uiFJ1jjYMv2E5OPHgAge-fVKoD_Oy1R3xhV4Og67M50/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzcyLzAzLzAx/LzM2MF9GXzE3MjAz/MDE2OF9XTktkc3N6/bnlNWm85TncxakpT/QUlmWlpNWENrWk1z/dy5qcGc" alt="Whey Isolate" loading="lazy" />
+        <div class="product-info">
+          <div class="product-name">Whey Isolate</div>
+          <div class="product-desc">90% protein by weight. Cold-filtered, hydrolysed, absorbed in under 20 minutes.</div>
+          <div class="product-meta">
+            <span class="product-price">$54</span>
+            <span class="product-tag">Best Seller</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card" data-card>
+        <img class="product-img" src="https://imgs.search.brave.com/wr4RE8ZHRABcen2VhBmY7jAi1IbNy97Yz0kmdj2BDw4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzA2/NzAvOTk4OC81Nzgz/L2ZpbGVzL0luZ3Jl/ZGllbnRfQnJlYWtk/b3duLmpwZz92PTE3/Njk3MTM3NDQmd2lk/dGg9ODAw" alt="Pre-Workout" loading="lazy" />
+        <div class="product-info">
+          <div class="product-name">Pre-Workout</div>
+          <div class="product-desc">Citrulline, beta-alanine, and 300mg caffeine. Energy without the crash.</div>
+          <div class="product-meta">
+            <span class="product-price">$42</span>
+            <span class="product-tag">New</span>
+          </div>
+        </div>
+      </article>
+      <article class="product-card" data-card>
+        <img class="product-img" src="https://imgs.search.brave.com/PIw5OL0KbjdKbscvEptNWIz-c5fsDX7QS5x2wB8Gyco/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9uYWtw/cm8uY29tL2Nkbi9z/aG9wL2ZpbGVzLzA1/XzBkYTNhMzcxLTli/YjItNDA1Ni1hODAy/LWJjNDhkNjQ3M2Vh/Mi5wbmc_dj0xNzc2/NTE0NzQ2JndpZHRo/PTcyMA" alt="Creatine" loading="lazy" />
+        <div class="product-info">
+          <div class="product-name">Creatine Mono</div>
+          <div class="product-desc">Micronised monohydrate. The most researched sports supplement in history.</div>
+          <div class="product-meta">
+            <span class="product-price">$28</span>
+            <span class="product-tag">Core</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS ═══════════ -->
+<section class="pinned-section" id="stats" style="height:300vh">
+  <div class="pinned-sticky stats-sticky">
+    <!-- grid pulse field: the component (grid-pulse.js), under the content -->
+    <div class="grid-pulse" id="statsPulse" aria-hidden="true"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,3.2vw,48px);margin-bottom:60px">
+      <p class="section-eyebrow">The Numbers</p>
+      <h2 class="section-h2" data-grid-avoid>Proven in the lab.<br/><span class="serif">Proven in the gym.</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat" data-grid-avoid data-count="25" data-suffix="g">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Protein per serving</div>
+      </div>
+      <div class="stat" data-grid-avoid data-count="0" data-suffix="g">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Sugar ever</div>
+      </div>
+      <div class="stat" data-grid-avoid data-count="100" data-suffix="%">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Natural ingredients</div>
+      </div>
+      <div class="stat" data-grid-avoid data-count="40" data-suffix="+">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Servings per tub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURE ═══════════ -->
+<section class="pinned-section" id="feature" style="height:300vh">
+  <div class="pinned-sticky feature-sticky">
+    <!-- full-bleed image stream corridor — built by image-stream-hero.js,
+         the imagery comes from hero-images.js. The corridor is the whole
+         section; the copy rides in a band along the bottom, like the hero. -->
+    <div class="feature-stream" id="featureStream"></div>
+    <div class="feature-wash" aria-hidden="true"></div>
+
+    <div class="feature-split">
+      <div>
+        <p class="section-eyebrow">Quality</p>
+        <h2 class="section-h2">You put in the reps.<br/>We make sure they <span class="serif">count.</span></h2>
+      </div>
+      <div class="feature-points">
+        <div class="feature-point">
+          <span class="feature-dot"></span>
+          <div>
+            <div class="feature-pt-title">Liposomal Delivery</div>
+            <div class="feature-pt-desc">Encapsulated nutrients pass through the gut intact — reaching cells where they actually work.</div>
+          </div>
+        </div>
+        <div class="feature-point">
+          <span class="feature-dot"></span>
+          <div>
+            <div class="feature-pt-title">Third-Party Tested</div>
+            <div class="feature-pt-desc">Every batch verified by an independent lab. No prohibited substances, ever.</div>
+          </div>
+        </div>
+        <div class="feature-point">
+          <span class="feature-dot"></span>
+          <div>
+            <div class="feature-pt-title">Zero Fillers</div>
+            <div class="feature-pt-desc">No maltodextrin, no titanium dioxide, no anti-caking agents. Just active compounds.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ QUOTE ═══════════ -->
+<section class="pinned-section" style="height:200vh">
+  <div class="pinned-sticky quote-sticky">
+    <div class="quote-boxes" aria-hidden="true"><div class="boxes-layer" id="boxesLayer"></div></div>
+    <div class="quote-inner">
+      <p class="quote-text">"The difference isn't the workout — it's what you put back in."</p>
+      <p class="quote-attr">— Dr. Sarah Chen, Sports Nutritionist</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA + FOOTER ═══════════ -->
+<section class="cta-section" id="cta">
+  <!-- 3D testimonials layer: the component (testimonial-marquee.js), under the copy -->
+  <div class="cta-3d" id="cta3d" aria-hidden="true"></div>
+  <h2 class="cta-h2">Ready to <span class="serif">transform?</span></h2>
+  <p class="cta-sub">Join 50,000+ athletes who train smarter.</p>
+  <form class="cta-form">
+    <input class="cta-input" type="email" placeholder="Enter your email" required />
+    <button class="cta-submit" type="submit">Get 15% off</button>
+  </form>
+</section>
+<footer class="footer">
+  <span>© 2024 Pure Muscle Nutrition</span>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Twitter</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+</footer>
+
+<!-- hero sculpture: the component, then the site scripts -->
+<script src="liquid-sculpture-hero.js"></script>
+<!-- gradient wave + grid pulse: the components, then the site scripts -->
+<script src="gradient-wave.js"></script>
+<script src="grid-pulse.js"></script>
+<!-- 3D testimonials: the component, mounted by the site scripts -->
+<script src="testimonial-marquee.js"></script>
+<!-- feature corridor: the component, then its image list, then app -->
+<script src="image-stream-hero.js"></script>
+<script src="hero-images.js"></script>
+<!-- background: the gym-equipment scatter, then the site scripts -->
+<script src="gym-background.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
